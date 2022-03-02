@@ -18,7 +18,9 @@
     Points available: {{club['points']}}
     <h3>Competitions:</h3>
     <ul>
+        
         {% for comp in competitions%}
+        
         <li>
             {{comp['name']}}<br />
             Date: {{comp['date']}}</br>
@@ -28,9 +30,11 @@
             {%endif%}
         </li>
         <hr />
+        
         {% endfor %}
+        
     </ul>
-    {%endwith%}
+    {% endwith %}
 
 </body>
 </html>
