@@ -54,12 +54,8 @@ def purchasePlaces():
     if club_point < placesRequired :
         flash("Sorry, you don't have enough points.")
         return render_template('booking.html',club=club, competition=competition)
-    if placesRequired > 12:
-        flash("Sorry, you have exceeded your points quota available.")
-        return render_template('booking.html',club=club, competition=competition)
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
-        club["points"] = club_point - placesRequired
         flash('Great-booking complete!')
         return render_template('welcome.html', club=club, competitions=competitions)
 
