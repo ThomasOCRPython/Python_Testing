@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Points display board</title>
+</head>
+<body>
+    <table  style=" margin-left:auto; margin-right:auto;">
+        <!-- <colgroup>
+            <col>
+            <col style="background-color: yellow">
+          </colgroup> -->
+            <tr>
+                <th style="border: 1px solid">Club</th>
+                <th style="border: 1px solid">Points</th>
+            </tr>
+        
+       
+            {%for club in clubs%}
+            <tr>
+                <td style="border: 1px solid">{{club['name']}}</td>
+                <td style="border: 1px solid">{{club['points']}}</td>
+            </tr>
+            {%endfor%}
+       
+    </table>
+</body>
+</html>

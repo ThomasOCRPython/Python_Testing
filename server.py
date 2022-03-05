@@ -31,7 +31,7 @@ def showSummary():
     date_time_now = str(datetime.now())
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
-        return render_template('welcome.html',club=club,competitions=competitions,date=date_time_now)
+        return render_template('welcome.html',club=club,competitions=competitions,date=date_time_now, clubs=clubs)
     except IndexError:
         flash("Sorry, that email wasn't found.")
         return render_template('index.html',error_message="Sorry, that email wasn't found.",date=date_time_now)
@@ -52,10 +52,10 @@ def book(competition,club):
         # return render_template('welcome.html',club=club, competition=competition, date=date_time)
     
     if foundClub and foundCompetition:
-        return render_template('booking.html',club=foundClub,competition=foundCompetition,date=date_time)
+        return render_template('booking.html',club=foundClub,competition=foundCompetition,date=date_time, clubs=clubs)
     else:
         flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions, date=date_time)
+        return render_template('welcome.html', club=club, competitions=competitions, date=date_time, clubs=clubs)
 
 
 @app.route('/purchasePlaces',methods=['POST'])
@@ -65,24 +65,23 @@ def purchasePlaces():
     placesRequired = int(request.form['places'])
     club_point = int(club['points'])
     date = str(datetime.now())
-    # competition_date = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")
-
-    # if date_time_now > competition_date:
-    #     # flash("Sorry , this competitions is over.")
-    #     return render_template('booking.html',club=club, competition=competition, date=date_time_now)
+    
         
     if club_point < placesRequired :
         flash("Sorry, you don't have enough points.")
-        return render_template('booking.html',club=club, competition=competition, date=date)
+        return render_template('booking.html',club=club, competition=competition, date=date, clubs=clubs)
     
     elif placesRequired > 12:
         flash("Sorry, you have exceeded your points quota available.")
-        return render_template('booking.html',club=club, competition=competition, date=date)
+        return render_template('booking.html',club=club, competition=competition, date=date, clubs=clubs)
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
         flash('Great-booking complete!')
-        return render_template('welcome.html', club=club, competitions=competitions, date=date)
+        return render_template('welcome.html', club=club, competitions=competitions, date=date, clubs=clubs)
 
+@app.route('/pointsBoard')
+def points_display():
+    return render_template('board.html', clubs=clubs)
 
 # TODO: Add route for points display
 
