@@ -46,6 +46,7 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
+    club_point = int(club['points'])
 
     # date_time_now = datetime.now()
     # competition_date = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")
