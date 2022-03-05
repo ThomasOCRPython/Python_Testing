@@ -1,6 +1,8 @@
 import json
 from flask import Flask,render_template,request,redirect,flash,url_for
 from datetime import datetime
+from flask_api import status
+from flask import Response
 
 def loadClubs():
     with open('clubs.json') as c:
@@ -44,8 +46,10 @@ def book(competition,club):
     competition_date = foundCompetition['date']
 
     if date_time > competition_date:
+        return Response("The response body goes here",status=400,)
+        # return "Record not found", status.HTTP_400_BAD_REQUEST
         # flash("Sorry , this competitions is over.")
-        return render_template('booking.html',club=club, competition=competition, date=date_time)
+        # return render_template('welcome.html',club=club, competition=competition, date=date_time)
     
     if foundClub and foundCompetition:
         return render_template('booking.html',club=foundClub,competition=foundCompetition,date=date_time)
