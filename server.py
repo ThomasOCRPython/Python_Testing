@@ -31,7 +31,9 @@ def showSummary():
     date_time_now = str(datetime.now())
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
-        return render_template('welcome.html',club=club,competitions=competitions,date=date_time_now, clubs=clubs)
+  
+        
+        return render_template('welcome.html', club=club,competitions=competitions,date=date_time_now, clubs=clubs)
     except IndexError:
         flash("Sorry, that email wasn't found.")
         return render_template('index.html',error_message="Sorry, that email wasn't found.",date=date_time_now)
@@ -41,6 +43,7 @@ def book(competition,club):
     
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
+    
 
     date_time = str(datetime.now())
     competition_date = foundCompetition['date']
@@ -52,6 +55,7 @@ def book(competition,club):
         # return render_template('welcome.html',club=club, competition=competition, date=date_time)
     
     if foundClub and foundCompetition:
+        
         return render_template('booking.html',club=foundClub,competition=foundCompetition,date=date_time, clubs=clubs)
     else:
         flash("Something went wrong-please try again")
@@ -76,6 +80,7 @@ def purchasePlaces():
         return render_template('booking.html',club=club, competition=competition, date=date, clubs=clubs)
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+        # club["points"] = club_point - placesRequired
         flash('Great-booking complete!')
         return render_template('welcome.html', club=club, competitions=competitions, date=date, clubs=clubs)
 
