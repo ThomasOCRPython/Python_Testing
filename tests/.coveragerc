@@ -1,4 +1,4 @@
 [run]
-omit = chemin_du_répertoire/*
+omit = C:/Users/Latitude/P11/Python_Testing/*
 omit = tests/*
  
