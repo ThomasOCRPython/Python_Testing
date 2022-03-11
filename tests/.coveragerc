@@ -1,0 +1,4 @@
+[run]
+omit = chemin_du_répertoire/*
+omit = tests/*
+ 

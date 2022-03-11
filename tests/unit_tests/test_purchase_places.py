@@ -40,7 +40,8 @@ def test_purchase_places_over_12_point(client,mocker):
 
     data1 = mock_club[0]['name']
     data2 =  mock_competitions[1]['name']
-    # print (mock_club[0]['points'],555555555555555)
+    mock_club[0]['points'] = 13
+    print (mock_club[0]['points'],555555555555555)
     places = 13
 
     mocker.patch.object(server, 'clubs', mock_club)
@@ -50,3 +51,17 @@ def test_purchase_places_over_12_point(client,mocker):
     
     assert flash_message("") == "['Sorry, you have exceeded your points quota available.']"
     assert response.status_code == 200
+
+#vérifie point retiré
+def test_purchase_places_remaining_point(client,mocker):
+    data1 = mock_club[0]['name']
+    data2 =  mock_competitions[1]['name']
+    places = 3
+    
+
+    mocker.patch.object(server, 'clubs', mock_club)
+    mocker.patch.object(server, 'competitions', mock_competitions)
+
+    response = client.post("/purchasePlaces", data={'club':data1,'competition':data2,'places':places})
+    assert mock_club[0]['points'] == 10
+    assert "Points available: 10" in response.data.decode('utf-8')
