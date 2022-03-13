@@ -1,0 +1,3 @@
+[flake8]
+exclude = venv/, ./tests/performance_tests/
+max-line-length = 119
