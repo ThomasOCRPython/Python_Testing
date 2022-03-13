@@ -46,7 +46,6 @@ def test_purchase_places_over_12_point(client, mocker):
     data1 = mock_club[0]["name"]
     data2 = mock_competitions[1]["name"]
     mock_club[0]["points"] = 13
-    print(mock_club[0]["points"], 555555555555555)
     places = 13
 
     mocker.patch.object(server, "clubs", mock_club)

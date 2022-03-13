@@ -28,35 +28,9 @@ def test_show_remaining_places(client, mocker):
     assert response.status_code == 200
 
     index = client.get("/book/{}/{}".format(data2, data1))
-    print(index.data.decode("utf-8"))
     assert "Places available: 23" in index.data.decode("utf-8")
 
 
-# test + 12
-# def test_show_not_remaining_places_because_exeeded_quota(client,mocker):
-
-
-#     data1 =  mock_club[0]['name']
-#     data2 = mock_competitions[0]['name']
-#     # number_of_places =  mock_competitions[0]['numberOfPlaces']
-#     places = '13'
-
-#     mocker.patch.object(server, 'clubs', mock_club)
-#     mocker.patch.object(server, 'competitions', mock_competitions)
-
-#     response = client.post("/purchasePlaces", data={'club':data1,'competition':data2,'places':places})
-
-#     new_number_of_places = mock_competitions[0]['numberOfPlaces']
-
-#     # assert new_number_of_places != int(number_of_places) - int(places)
-
-#     assert flash_message("") == "['Sorry, you have exceeded your points quota available.']"
-
-#     assert response.status_code == 200
-
-#     index = client.get('/book/{}/{}'.format(data2, data1))
-#     print(index.data.decode('utf-8'))
-#     assert 'Places available: 23' in index.data.decode('utf-8')
 def test_show_not_remaining_places_because_exeeded_quota(client, mocker):
 
     data1 = mock_club[0]["name"]

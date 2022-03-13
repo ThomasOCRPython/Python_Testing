@@ -41,5 +41,4 @@ def test_book_not_display_competition_open(client, mocker):
     mocker.patch.object(server, "competitions", mock_competitions)
 
     response = client.get("/book/{}/{}".format(data2, data1))
-    print(response.data.decode("utf-8"))
     assert response.status_code == 400
