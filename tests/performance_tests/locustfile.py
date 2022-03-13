@@ -21,7 +21,7 @@ class ProjectPerfTest(HttpUser):
     def index(self):
         response = self.client.get("/")
 
-    @task(3)
+    @task(6)
     def login(self):
         response = self.client.post("/showSummary", data={"email": self.email})
 
